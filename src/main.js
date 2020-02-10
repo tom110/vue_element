@@ -20,7 +20,14 @@ Vue.prototype.$http = axios
 
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+// eslint-disable-next-line no-unused-vars
+function startup () {
+  new Vue({
+    router,
+    render: h => h(App)
+  }).$mount('#app')
+}
+
+// 1 XE.ready()会加载Cesium.js等其他资源，注意ready()返回一个Promise对象。
+// eslint-disable-next-line no-undef
+XE.ready().then(startup)
