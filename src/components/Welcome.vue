@@ -6,10 +6,12 @@
 
 <script>
 // 1 创建Earth的vue组件
-export default{
+export default {
   data () {
     return {
+      // eslint-disable-next-line vue/no-reserved-keys
       _earth: undefined, // 注意：Earth和Cesium的相关变量放在vue中，必须使用下划线作为前缀！
+      // eslint-disable-next-line vue/no-reserved-keys
       _bgImagery: undefined
     }
   },
@@ -27,6 +29,7 @@ export default{
             xbsjType: 'Imagery',
             xbsjImageryProvider: {
               createTileMapServiceImageryProvider: {
+                // eslint-disable-next-line no-undef
                 url: XE.HTML.cesiumDir + 'Assets/Textures/NaturalEarthII',
                 fileExtension: 'jpg'
               },
