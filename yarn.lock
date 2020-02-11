@@ -2398,6 +2398,24 @@ copy-webpack-plugin@^5.0.3:
     serialize-javascript "^2.1.0"
     webpack-log "^2.0.0"
 
+copy-webpack-plugin@^5.1.1:
+  version "5.1.1"
+  resolved "https://registry.npm.taobao.org/copy-webpack-plugin/download/copy-webpack-plugin-5.1.1.tgz#5481a03dea1123d88a988c6ff8b78247214f0b88"
+  integrity sha1-VIGgPeoRI9iKmIxv+LeCRyFPC4g=
+  dependencies:
+    cacache "^12.0.3"
+    find-cache-dir "^2.1.0"
+    glob-parent "^3.1.0"
+    globby "^7.1.1"
+    is-glob "^4.0.1"
+    loader-utils "^1.2.3"
+    minimatch "^3.0.4"
+    normalize-path "^3.0.0"
+    p-limit "^2.2.1"
+    schema-utils "^1.0.0"
+    serialize-javascript "^2.1.2"
+    webpack-log "^2.0.0"
+
 core-js-compat@^3.1.1, core-js-compat@^3.3.2:
   version "3.4.3"
   resolved "https://registry.npm.taobao.org/core-js-compat/download/core-js-compat-3.4.3.tgz?cache=0&sync_timestamp=1574778300914&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcore-js-compat%2Fdownload%2Fcore-js-compat-3.4.3.tgz#54f2c5cd77b8b5acc5048904cc795722c9d590d1"
@@ -3001,6 +3019,11 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
+
+earthsdk@^1.2.22:
+  version "1.2.22"
+  resolved "https://registry.npm.taobao.org/earthsdk/download/earthsdk-1.2.22.tgz#2b5f269784720c4fe354e2d00917912cd0c0c767"
+  integrity sha1-K18ml4RyDE/jVOLQCReRLNDAx2c=
 
 easy-stack@^1.0.0:
   version "1.0.0"
@@ -7186,6 +7209,11 @@ serialize-javascript@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npm.taobao.org/serialize-javascript/download/serialize-javascript-2.1.0.tgz#9310276819efd0eb128258bb341957f6eb2fc570"
   integrity sha1-kxAnaBnv0OsSgli7NBlX9usvxXA=
+
+serialize-javascript@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.npm.taobao.org/serialize-javascript/download/serialize-javascript-2.1.2.tgz?cache=0&sync_timestamp=1575910505665&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fserialize-javascript%2Fdownload%2Fserialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
+  integrity sha1-7OxTsOAxe9yV73arcHS3OEeF+mE=
 
 serve-index@^1.9.1:
   version "1.9.1"
