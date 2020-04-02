@@ -4,7 +4,7 @@
     <el-header>
       <div>
         <img src="../assets/heima.png" alt />
-        <span>地质大数据平台</span>
+        <span>地质大数据集成综合服务平台</span>
       </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
@@ -73,8 +73,8 @@
       </el-aside>
       <!-- 右侧内容主体 -->
       <el-main>
-        <div class="earth">
-          <div ref="earthContainer" class="earthContainer"></div>
+        <div class="earth" :style="{ width: widthpercent }">
+          <div ref="earthContainer" id="main" class="earthContainer"></div>
         </div>
         <div ref="routerView" class="routerView" v-bind:class="{displayNone:isDisplay}">
           <!-- 路由占位符 -->
@@ -89,6 +89,7 @@
 export default {
   data() {
     return {
+      widthpercent: '90%',
       // eslint-disable-next-line vue/no-reserved-keys
       _earth: undefined, // 注意：Earth和Cesium的相关变量放在vue中，必须使用下划线作为前缀！
       // eslint-disable-next-line vue/no-reserved-keys
@@ -115,34 +116,34 @@ export default {
   },
   // 1.1 资源创建
   mounted() {
-    // 1.1.1 创建地球
     // eslint-disable-next-line no-undef
-    var earth = new XE.Earth(this.$refs.earthContainer)
+    XbsjEarthUI.create('main').then(earthUI => {
+      window.uia = earthUI
 
-    // 1.1.2 添加默认地球影像
-    earth.sceneTree.root = {
-      children: [
-        {
-          czmObject: {
-            name: '默认离线影像',
-            xbsjType: 'Imagery',
-            xbsjImageryProvider: {
-              createTileMapServiceImageryProvider: {
-                // eslint-disable-next-line no-undef
-                url: XE.HTML.cesiumDir + 'Assets/Textures/NaturalEarthII',
-                fileExtension: 'jpg'
-              },
-              type: 'createTileMapServiceImageryProvider'
-            }
+      earthUI.earth.sceneTree.root = {
+        children: [
+          {
+            title: '新建场景',
+            children: [
+              {
+                czmObject: {
+                  name: '谷歌影像',
+                  xbsjType: 'Imagery',
+                  xbsjImageryProvider: {
+                    XbsjImageryProvider: {
+                      url:
+                        '//www.google.cn/maps/vt?lyrs=s,h&gl=CN&x={x}&y={y}&z={z}',
+                      srcCoordType: 'GCJ02',
+                      dstCoordType: 'WGS84'
+                    }
+                  }
+                }
+              }
+            ]
           }
-        }
-      ]
-    }
-
-    this._earth = earth
-
-    // 仅为调试方便用
-    window.earth = earth
+        ]
+      }
+    })
   },
   // 1.2 资源销毁
   beforeDestroy() {
@@ -156,13 +157,19 @@ export default {
     },
     // 获取所有的菜单
     async getMenuList() {
-      const { data: res } = await this.$http.get('menus')
-      if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
-      this.menulist = res.data
-      console.log(res)
+      const userid = window.sessionStorage.getItem('userid')
+      const data = await this.$http.get('api/vertify/getMenus/' + userid)
+      if (data.status !== 200) return this.$message.error('获取菜单失败')
+      this.menulist = data.data
+      // console.log(data.data)
     },
     // 点击按钮，切换菜单的折叠与展开
     toggleCollapse() {
+      if (this.isCollapse) {
+        this.widthpercent = '90%'
+      } else {
+        this.widthpercent = '98%'
+      }
       this.isCollapse = !this.isCollapse
     },
     // 保存链接的激活状态
@@ -226,10 +233,12 @@ export default {
   cursor: pointer;
 }
 .earth {
-  height: 100%;
-  width: 100%;
+  height: calc(100% - 60px);
+  width: calc(100% - 200px);
   position: fixed;
-  background: red;
+  background: black;
+  padding: 0;
+  margin: 0;
 }
 .routerView {
   padding: 20px;
@@ -245,5 +254,4 @@ export default {
 .displayNone {
   display: none;
 }
-
 </style>

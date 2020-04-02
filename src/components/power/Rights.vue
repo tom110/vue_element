@@ -40,13 +40,13 @@ export default {
   methods: {
     // 获取权限列表
     async getRightsList () {
-      const { data: res } = await this.$http.get('rights/list')
-      if (res.meta.status !== 200) {
+      const data = await this.$http.get('api/vertify/permission/list')
+      if (data.status !== 200) {
         return this.$message.error('获取权限列表失败！')
       }
 
-      this.rightsList = res.data
-      console.log(this.rightsList)
+      this.rightsList = data.data
+      // console.log(this.rightsList)
     }
   }
 }
